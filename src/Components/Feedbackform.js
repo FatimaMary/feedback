@@ -1,11 +1,35 @@
 import React, { useState } from 'react'
 
+const getDatafromEntry = () => {
+    const entry = localStorage.getItem("feedback");
+    if (entry) {
+      return JSON.parse(entry);
+    } else {
+      return [];
+    }
+  };
+
 function Feedbackform() {
     const [name, setName] = useState("");
     const [mobile, setMobile] = useState("");
+    const [comments, setComments] = useState("");
+    const [data, setData] = useState(getDatafromEntry());
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        let newFeedback = {
+            id: data.length + 1,
+            name,
+            mobile,
+            comments
+        };
+        setName("");
+        setMobile("");
+        setComments("");
+
+        localStorage.setItem("feedback", JSON.stringify([...data, newFeedback]));
+        setData();
     }
 
   return (
@@ -30,7 +54,7 @@ function Feedbackform() {
             </div>
             <div className='form-div'>
                 <label className='form-div-label'>Comments</label>
-                <textarea className='form-div-input'/>
+                <textarea className='form-div-input' value={comments} onChange={(e) => setComments(e.target.value)}/>
             </div>
             <div className='form-div'>
                 <button className='form-div-input'>Submit</button>
