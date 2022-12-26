@@ -12,8 +12,16 @@ const getDatafromEntry = ( ) => {
   };
 
 
-function FeedbackTable() {
+function FeedbackTable({ likeBtn, dislike }) {
+    const [accept, setAccept] = useState(false);
+    const [reject, setReject] = useState(false);
     const [data, setData] = useState(getDatafromEntry());
+
+    const acceptValue = () => {
+        <div>Accepted</div>
+        setAccept(true);
+
+    }
   return (
     <div className='feedback-container'>
         <h1>Feedback Table</h1>
@@ -35,11 +43,11 @@ function FeedbackTable() {
                     <td>{list.name}</td>
                     <td>{list.mobile}</td>
                     <td>{list.rating}</td>
-                    <td>{list.activeBtn}</td>
+                    <td>{list.likeBtn} </td>
                     <td>{list.comments}</td>
                     <td>
                     <div className='form-div-input'>
-                        <ThumbUpOffAltIcon/>
+                        <ThumbUpOffAltIcon value={accept} onClick={acceptValue}/>
                         <ThumbDownOffAltIcon/>
                     </div>
                     </td>
