@@ -14,12 +14,31 @@ const getDatafromEntry = () => {
     }
   };
 
-function Feedbackform() {
+function Feedbackform( ) {
     const [name, setName] = useState("");
     const [mobile, setMobile] = useState("");
+    const [rating, setRating] = useState()
+    const [activeBtn, setActiveBtn] = useState("none")
     const [comments, setComments] = useState("");
     const [data, setData] = useState(getDatafromEntry());
     const navigate = useNavigate();
+
+    const handleLikeClick = () => {
+        if (activeBtn === "none") {
+          setActiveBtn("yes");
+          return;
+        }
+     
+        if (activeBtn === 'like'){
+          setActiveBtn("yes");
+          return;
+        }
+     
+        if (activeBtn === "dislike") {
+          setActiveBtn("no");
+        }
+        console.log(setActiveBtn())
+      };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,10 +47,14 @@ function Feedbackform() {
             id: data.length + 1,
             name,
             mobile,
+            rating,
+            activeBtn,
             comments
         };
         setName("");
         setMobile("");
+        setRating("");
+        setActiveBtn("")
         setComments("");
 
         localStorage.setItem("feedback", JSON.stringify([...data, newFeedback]));
@@ -53,26 +76,21 @@ function Feedbackform() {
             </div>
             <div className='form-div'>
                 <label className='form-div-label'>How do you rate our Service?</label>
-                {/* <FontAwesomeIcon icon="fa-regular fa-star" />
-                <FontAwesomeIcon icon="fa-regular fa-star" />
-                <FontAwesomeIcon icon="fa-regular fa-star" />
-                <FontAwesomeIcon icon="fa-regular fa-star" />
-                <FontAwesomeIcon icon="fa-regular fa-star" /> */}
-                <StarRating className='form-div-input'/>
+                <StarRating className='form-div-input' value={rating} onClick={(e) => setRating(e.target.value)} onChange={(e, newValue) => setRating(newValue)}/>
             </div>
             <div className='form-div'>
                 <label className='form-div-label'>Will you recommend us to Friends?</label>
                 <div className='form-div-input'>
-                    <ThumbUpOffAltIcon/>
-                    <ThumbDownOffAltIcon/>
+                    <ThumbUpOffAltIcon className={`btn ${activeBtn === "like" ? "like-active" : ""}`} value={activeBtn} onClick={handleLikeClick}/>
+                    <ThumbDownOffAltIcon className={`btn ${activeBtn === "dislike" ? "dislike-active" : ""}`} value={activeBtn} onClick={handleLikeClick}/>
                 </div>
             </div>
             <div className='form-div'>
                 <label className='form-div-label'>Comments</label>
-                <textarea className='form-div-input' value={comments} onChange={(e) => setComments(e.target.value)}/>
+                <textarea className='form-div-input' value={comments} onChange={(e) => setComments(e.target.value)} />
             </div>
             <div className='form-div'>
-                <button className='form-div-input'>Submit</button>
+                <button className='form-div-btn'>Submit</button>
             </div>
         </form>
     </div>

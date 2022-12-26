@@ -2,6 +2,15 @@
   text-align: center;
 }
 
+.form-div-btn {
+  width: 10%;
+  padding:10px;
+  border-radius: 20px;
+  border: none;
+  background-color: #49fca8;
+  font-size: 16px;
+}
+
 .feedback-container {
   display: flex;
   flex-direction: column;

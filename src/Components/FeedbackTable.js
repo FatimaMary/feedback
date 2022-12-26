@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 
 const getDatafromEntry = ( ) => {
     const data = localStorage.getItem("feedback");
@@ -32,10 +34,15 @@ function FeedbackTable() {
                   <tr key={list} className='feedback-table'>
                     <td>{list.name}</td>
                     <td>{list.mobile}</td>
-                    <td>{list.starrating}</td>
-                    <td>{list.recommend}</td>
+                    <td>{list.value}</td>
+                    <td>{list.activeBtn}</td>
                     <td>{list.comments}</td>
-                    <td></td>
+                    <td>
+                    <div className='form-div-input'>
+                        <ThumbUpOffAltIcon/>
+                        <ThumbDownOffAltIcon/>
+                    </div>
+                    </td>
                   </tr>
               ))
           }

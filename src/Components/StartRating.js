@@ -1,29 +1,15 @@
-import React, { useState } from "react";
-import './StarRating.css'
+import React, { useState } from 'react'
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating'
 
-const StarRating = () => {
-  const [rating, setRating] = useState(0);
-  const [hover, setHover] = useState(0);
+function StartRating() {
+    const [value, setValue] = useState(1);
+    console.log(value);
   return (
-    <div className="star-rating">
-      {[...Array(5)].map((star, index) => {
-        index += 1;
-        return (
-          <button
-            type="button"
-            key={index}
-            className={index <= (hover || rating) ? "on" : "off"}
-            onClick={() => setRating(index)}
-            onMouseEnter={() => setHover(index)}
-            onMouseLeave={() => setHover(rating)}
-            value={index}
-          >
-            <span className="star">&#9733;</span>
-          </button>
-        );
-      })}
-    </div>
-  );
-};
+    <Box sx={{"& > legend" : { mt: 2},}}>
+        <Rating name="simple-controlled" value={value} onClick={(e) => setValue(e.target.value)} onChange={(e, newValue) => setValue(newValue)}/>
+    </Box>
+  )
+}
 
-export default StarRating;
+export default StartRating
