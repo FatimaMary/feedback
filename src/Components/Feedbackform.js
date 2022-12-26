@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import StarRating from './StartRating';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/system';
+import { Rating } from '@mui/material';
 
 const getDatafromEntry = () => {
     const entry = localStorage.getItem("feedback");
@@ -18,26 +18,26 @@ function Feedbackform( ) {
     const [name, setName] = useState("");
     const [mobile, setMobile] = useState("");
     const [rating, setRating] = useState()
-    const [activeBtn, setActiveBtn] = useState("none")
+    const [likeBtn, setLikeBtn] = useState(false)
     const [comments, setComments] = useState("");
     const [data, setData] = useState(getDatafromEntry());
     const navigate = useNavigate();
 
     const handleLikeClick = () => {
-        if (activeBtn === "none") {
-          setActiveBtn("yes");
+        if (likeBtn === "none") {
+          setLikeBtn("yes");
           return;
         }
      
-        if (activeBtn === 'like'){
-          setActiveBtn("yes");
+        if (likeBtn === 'like'){
+          setLikeBtn("yes");
           return;
         }
      
-        if (activeBtn === "dislike") {
-          setActiveBtn("no");
+        if (likeBtn === "dislike") {
+          setLikeBtn("no");
         }
-        console.log(setActiveBtn())
+        console.log(setLikeBtn())
       };
 
     const handleSubmit = (e) => {
@@ -48,13 +48,13 @@ function Feedbackform( ) {
             name,
             mobile,
             rating,
-            activeBtn,
+            activeBtn: likeBtn,
             comments
         };
         setName("");
         setMobile("");
         setRating("");
-        setActiveBtn("")
+        setLikeBtn("")
         setComments("");
 
         localStorage.setItem("feedback", JSON.stringify([...data, newFeedback]));
@@ -76,13 +76,16 @@ function Feedbackform( ) {
             </div>
             <div className='form-div'>
                 <label className='form-div-label'>How do you rate our Service?</label>
-                <StarRating className='form-div-input' value={rating} onClick={(e) => setRating(e.target.value)} onChange={(e, newValue) => setRating(newValue)}/>
+                <Box sx={{"& > legend" : { mt: 2},}}>
+                    <Rating name="simple-controlled" value={rating} onClick={(e) => setRating(e.target.value)} onChange={(e, newValue) => setRating(newValue)}/>
+                </Box>
+                {/* <StarRating className='form-div-input' value={rating} onClick={(e) => setRating(e.target.value)} onChange={(e, newValue) => setRating(newValue)}/> */}
             </div>
             <div className='form-div'>
                 <label className='form-div-label'>Will you recommend us to Friends?</label>
                 <div className='form-div-input'>
-                    <ThumbUpOffAltIcon className={`btn ${activeBtn === "like" ? "like-active" : ""}`} value={activeBtn} onClick={handleLikeClick}/>
-                    <ThumbDownOffAltIcon className={`btn ${activeBtn === "dislike" ? "dislike-active" : ""}`} value={activeBtn} onClick={handleLikeClick}/>
+                    <ThumbUpOffAltIcon className={likeBtn} value={likeBtn} onClick={handleLikeClick}/>
+                    <ThumbDownOffAltIcon className={`btn ${likeBtn === "dislike" ? "dislike-active" : ""}`} value={likeBtn} onClick={handleLikeClick}/>
                 </div>
             </div>
             <div className='form-div'>

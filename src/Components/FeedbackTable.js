@@ -34,7 +34,7 @@ function FeedbackTable() {
                   <tr key={list} className='feedback-table'>
                     <td>{list.name}</td>
                     <td>{list.mobile}</td>
-                    <td>{list.value}</td>
+                    <td>{list.rating}</td>
                     <td>{list.activeBtn}</td>
                     <td>{list.comments}</td>
                     <td>
