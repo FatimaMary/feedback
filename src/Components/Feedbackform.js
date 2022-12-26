@@ -1,4 +1,9 @@
 import React, { useState } from 'react'
+import StarRating from './StartRating';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
 
 const getDatafromEntry = () => {
     const entry = localStorage.getItem("feedback");
@@ -14,6 +19,7 @@ function Feedbackform() {
     const [mobile, setMobile] = useState("");
     const [comments, setComments] = useState("");
     const [data, setData] = useState(getDatafromEntry());
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -30,6 +36,7 @@ function Feedbackform() {
 
         localStorage.setItem("feedback", JSON.stringify([...data, newFeedback]));
         setData();
+        navigate("/table")
     }
 
   return (
@@ -46,11 +53,19 @@ function Feedbackform() {
             </div>
             <div className='form-div'>
                 <label className='form-div-label'>How do you rate our Service?</label>
-                <input className='form-div-input'/>
+                {/* <FontAwesomeIcon icon="fa-regular fa-star" />
+                <FontAwesomeIcon icon="fa-regular fa-star" />
+                <FontAwesomeIcon icon="fa-regular fa-star" />
+                <FontAwesomeIcon icon="fa-regular fa-star" />
+                <FontAwesomeIcon icon="fa-regular fa-star" /> */}
+                <StarRating className='form-div-input'/>
             </div>
             <div className='form-div'>
                 <label className='form-div-label'>Will you recommend us to Friends?</label>
-                <input className='form-div-input'/>
+                <div className='form-div-input'>
+                    <ThumbUpOffAltIcon/>
+                    <ThumbDownOffAltIcon/>
+                </div>
             </div>
             <div className='form-div'>
                 <label className='form-div-label'>Comments</label>

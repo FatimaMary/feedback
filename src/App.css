@@ -2,3 +2,31 @@
   text-align: center;
 }
 
+.feedback-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 80%;
+  margin: 0 auto;
+  /* background-color: #edeade; */
+}
+
+th {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+th:first-child, td:first-child {
+  width: 20%;
+}
