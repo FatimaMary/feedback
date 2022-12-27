@@ -13,7 +13,9 @@ const getDatafromEntry = ( ) => {
 
 
 function FeedbackTable() {
+    const [click, setClick] = useState("")
     const [accept, setAccept] = useState(false);
+    const [reject, setReject] = useState(false);
     const [data, setData] = useState(getDatafromEntry());
 
     const acceptValue = (id) => {
@@ -48,10 +50,13 @@ function FeedbackTable() {
                     <td>
                     <div className='table-div-input'>
                       {
-
+                        accept ? (<p>Accepted</p>) : (<ThumbUpOffAltIcon value={click} onClick={(e) => setAccept("Accepted")}/>)
                       }
-                        <ThumbUpOffAltIcon value={accept} onClick={acceptValue()}/>
-                        <ThumbDownOffAltIcon/>
+                      {
+                        reject? (<p>Rejected</p>) : (<ThumbDownOffAltIcon value={click} onClick={(e) => setReject("Rejected")}/>)
+                      }
+                        
+                        
                     </div>
                     </td>
                   </tr>

@@ -31,7 +31,8 @@ function Feedbackform( ) {
             mobile,
             rating,
             likeBtn,
-            comments
+            comments,
+            accepted: ""
         };
         setName("");
         setMobile("");
