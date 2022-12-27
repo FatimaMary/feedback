@@ -14,16 +14,31 @@ const getDatafromEntry = ( ) => {
 
 function FeedbackTable() {
     const [click, setClick] = useState("")
-    const [accept, setAccept] = useState(false);
-    const [reject, setReject] = useState(false);
+    // const [accept, setAccept] = useState(false);
+    // const [reject, setReject] = useState(false);
     const [data, setData] = useState(getDatafromEntry());
 
-    const acceptValue = (id) => {
-        console.log("clicked")
-            // alert("Accepted")
-           setAccept(true)
-          //  <p>accepted</p>
-    }
+    const updateAcceptance = (id, value) => {
+      const updatedArray = data.map((singleValue) => {
+        console.log(id, singleValue.id);
+        if (singleValue.id === id) {
+          return {
+            id: singleValue.id,
+            name: singleValue.name,
+            mobile: singleValue.mobile,
+            rating: singleValue.rating,
+            likeBtn: singleValue.likeBtn,
+            comments: singleValue.comments,
+            accepted: value,
+          };
+        } else {
+          return singleValue;
+        }
+      });
+      console.log(updatedArray);
+      setData(updatedArray);
+      localStorage.setItem("feedback", JSON.stringify(updatedArray));
+    };
   return (
     <div className='feedback-container'>
         <h1>Feedback Table</h1>
@@ -50,8 +65,8 @@ function FeedbackTable() {
                     <td>
                     <div className='table-div-input'>
                       {
-                       list.accepted === accept ? (<p>Accepted</p>) : (reject ? (<p>Rejected</p>) : (<div><ThumbUpOffAltIcon value={click} onClick={(e) => setAccept("Accepted")}/>
-                        <ThumbDownOffAltIcon  value={click} onClick={(e) => setReject("Rejected")}/></div>))
+                       list.accepted === "Accepted" ? (<p>Accepted</p>) :list.accepted === "Rejected" ? (<p>Rejected</p>) : (<div><ThumbUpOffAltIcon value={click} onClick={() => updateAcceptance(list.id, "Accepted")}/>
+                        <ThumbDownOffAltIcon  value={click} onClick={() => updateAcceptance(list.id, "Rejected")}/></div>)
                       }
                     </div>
                     </td>
