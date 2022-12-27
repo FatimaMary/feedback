@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import { Rating } from '@mui/material';
 
 const getDatafromEntry = ( ) => {
     const data = localStorage.getItem("feedback");
@@ -59,14 +60,14 @@ function FeedbackTable() {
                   <tr key={list} className='feedback-table'>
                     <td>{list.name}</td>
                     <td>{list.mobile}</td>
-                    <td>{list.rating}</td>
+                    <td><Rating value={list.rating} readOnly/></td>
                     <td>{list.likeBtn} </td>
                     <td>{list.comments}</td>
                     <td>
                     <div className='table-div-input'>
                       {
-                       list.accepted === "Accepted" ? (<p>Accepted</p>) :list.accepted === "Rejected" ? (<p>Rejected</p>) : (<div><ThumbUpOffAltIcon value={click} onClick={() => updateAcceptance(list.id, "Accepted")}/>
-                        <ThumbDownOffAltIcon  value={click} onClick={() => updateAcceptance(list.id, "Rejected")}/></div>)
+                       list.accepted === "Accepted" ? (<p>Accepted</p>) :list.accepted === "Rejected" ? (<p>Rejected</p>) : (<div><ThumbUpOffAltIcon style={{color: "green"}} value={click} onClick={() => updateAcceptance(list.id, "Accepted")}/>
+                        <ThumbDownOffAltIcon style={{color: "red"}} value={click} onClick={() => updateAcceptance(list.id, "Rejected")}/></div>)
                       }
                     </div>
                     </td>

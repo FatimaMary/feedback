@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/system';
 import { Rating } from '@mui/material';
@@ -17,11 +19,21 @@ const getDatafromEntry = () => {
 function Feedbackform( ) {
     const [name, setName] = useState("");
     const [mobile, setMobile] = useState("");
-    const [rating, setRating] = useState();
-    const [likeBtn, setLikeBtn] = useState("");
+    const [rating, setRating] = useState("");
+    const [likeBtn, setLikeBtn] = useState();
     const [comments, setComments] = useState("");
     const [data, setData] = useState(getDatafromEntry());
     const navigate = useNavigate();
+
+    // const handleClick = () => {
+    //     setActive(!active);
+    //     setLikeBtn("Yes")
+    //   };
+
+    //   const handleOnClick = () => {
+    //     setActive(!active);
+    //     setLikeBtn("No")
+    //   };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -65,9 +77,9 @@ function Feedbackform( ) {
             </div>
             <div className='form-div'>
                 <label className='form-div-label'>Will you recommend us to Friends?</label>
-                <div className='form-div-input'>
-                    <ThumbUpOffAltIcon className='likeBtn' value={likeBtn} onClick={() => setLikeBtn("yes")}/>
-                    <ThumbDownOffAltIcon className='dislikebtn' value={likeBtn} onClick={() => setLikeBtn("No")}/>
+                <div className='form-div-input-icon'>
+                    <ThumbUpIcon className='likeBtn' style={{color: likeBtn === "Yes" ? "green" : "black"}}  value={likeBtn} onClick={() => setLikeBtn("Yes")} />
+                    <ThumbDownIcon className='dislikebtn' style={{color: likeBtn === "No" ? "red" : "black"}} value={likeBtn} onClick={() => setLikeBtn("No")}/>
                 </div>
             </div>
             <div className='form-div'>

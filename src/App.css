@@ -52,6 +52,10 @@
   font-size: 16px;
 }
 
+.form-div-input-icon {
+  display: flex;
+  justify-content: space-evenly;
+}
 .feedback-container {
   display: flex;
   flex-direction: column;
@@ -86,6 +90,14 @@ th:first-child, td:first-child {
   justify-content: space-around;
 }
 
-.likeBtn::after {
-  background-color: #49fca8;
+/* .likeBtn {
+ size: large;
+} */
+
+.on {
+  color: green;
+}
+
+.off {
+  color: black;
 }
