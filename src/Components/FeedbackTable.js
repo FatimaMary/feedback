@@ -12,15 +12,15 @@ const getDatafromEntry = ( ) => {
   };
 
 
-function FeedbackTable({ likeBtn, dislike }) {
+function FeedbackTable() {
     const [accept, setAccept] = useState(false);
-    const [reject, setReject] = useState(false);
     const [data, setData] = useState(getDatafromEntry());
 
-    const acceptValue = () => {
-        <div>Accepted</div>
-        setAccept(true);
-
+    const acceptValue = (id) => {
+        console.log("clicked")
+            // alert("Accepted")
+           setAccept(true)
+          //  <p>accepted</p>
     }
   return (
     <div className='feedback-container'>
@@ -46,8 +46,11 @@ function FeedbackTable({ likeBtn, dislike }) {
                     <td>{list.likeBtn} </td>
                     <td>{list.comments}</td>
                     <td>
-                    <div className='form-div-input'>
-                        <ThumbUpOffAltIcon value={accept} onClick={acceptValue}/>
+                    <div className='table-div-input'>
+                      {
+
+                      }
+                        <ThumbUpOffAltIcon value={accept} onClick={acceptValue()}/>
                         <ThumbDownOffAltIcon/>
                     </div>
                     </td>

@@ -18,41 +18,25 @@ function Feedbackform( ) {
     const [name, setName] = useState("");
     const [mobile, setMobile] = useState("");
     const [rating, setRating] = useState();
-    const [likeBtn, setLikeBtn] = useState(false);
-    const [dislike, setDislike] = useState(false);
+    const [likeBtn, setLikeBtn] = useState("");
     const [comments, setComments] = useState("");
     const [data, setData] = useState(getDatafromEntry());
     const navigate = useNavigate();
 
-    const handleLikeClick = () => {
-        setLikeBtn(true);
-        setDislike(false);
-        console.log("like clicked")
-      };
-
-      const handleDislikeClick = () => {
-        setDislike(true);
-        setLikeBtn(false);
-        console.log("dislike cllicked")
-      }
-
     const handleSubmit = (e) => {
         e.preventDefault();
-
         let newFeedback = {
             id: data.length + 1,
             name,
             mobile,
             rating,
-            likeBtn: "yes",
-            dislike: "No",
+            likeBtn,
             comments
         };
         setName("");
         setMobile("");
         setRating("");
-        setLikeBtn();
-        setDislike();
+        setLikeBtn("");
         setComments("");
 
         localStorage.setItem("feedback", JSON.stringify([...data, newFeedback]));
@@ -77,14 +61,12 @@ function Feedbackform( ) {
                 <Box sx={{"& > legend" : { mt: 2},}}>
                     <Rating name="simple-controlled" value={rating} className='form-div-input' onClick={(e) => setRating(e.target.value)} onChange={(e, newValue) => setRating(newValue)}/>
                 </Box>
-                {/* <StarRating className='form-div-input' value={rating} onClick={(e) => setRating(e.target.value)} onChange={(e, newValue) => setRating(newValue)}/> */}
             </div>
             <div className='form-div'>
                 <label className='form-div-label'>Will you recommend us to Friends?</label>
                 <div className='form-div-input'>
-                {/* className={index <= (hover || rating) ? "on" : "off"} */}
-                    <ThumbUpOffAltIcon className='likeBtn' value={likeBtn} onClick={handleLikeClick}/>
-                    <ThumbDownOffAltIcon className='dislikebtn' value={dislike} onClick={handleDislikeClick}/>
+                    <ThumbUpOffAltIcon className='likeBtn' value={likeBtn} onClick={() => setLikeBtn("yes")}/>
+                    <ThumbDownOffAltIcon className='dislikebtn' value={likeBtn} onClick={() => setLikeBtn("No")}/>
                 </div>
             </div>
             <div className='form-div'>

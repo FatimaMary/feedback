@@ -7,8 +7,6 @@ import FeedbackTable from './Components/FeedbackTable';
 function App() {
   return (
     <div className="App">
-      {/* <Feedbackform/>
-      <FeedbackTable/> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Feedbackform/>}/>

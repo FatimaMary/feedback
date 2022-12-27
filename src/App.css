@@ -81,6 +81,11 @@ th:first-child, td:first-child {
   width: 20%;
 }
 
+.table-div-input {
+  display: flex;
+  justify-content: space-around;
+}
+
 .likeBtn::after {
   background-color: #49fca8;
 }
