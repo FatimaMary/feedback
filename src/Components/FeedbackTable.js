@@ -50,13 +50,9 @@ function FeedbackTable() {
                     <td>
                     <div className='table-div-input'>
                       {
-                        accept ? (<p>Accepted</p>) : (<ThumbUpOffAltIcon value={click} onClick={(e) => setAccept("Accepted")}/>)
+                        accept ? (<p>Accepted</p>) : (reject ? (<p>Rejected</p>) : <div><ThumbUpOffAltIcon value={click} onClick={(e) => setAccept("Accepted")}/>
+                        <ThumbDownOffAltIcon  value={click} onClick={(e) => setReject("Rejected")}/></div>)
                       }
-                      {
-                        reject? (<p>Rejected</p>) : (<ThumbDownOffAltIcon value={click} onClick={(e) => setReject("Rejected")}/>)
-                      }
-                        
-                        
                     </div>
                     </td>
                   </tr>
