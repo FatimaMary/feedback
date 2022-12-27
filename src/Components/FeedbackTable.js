@@ -50,8 +50,8 @@ function FeedbackTable() {
                     <td>
                     <div className='table-div-input'>
                       {
-                        accept ? (<p>Accepted</p>) : (reject ? (<p>Rejected</p>) : <div><ThumbUpOffAltIcon value={click} onClick={(e) => setAccept("Accepted")}/>
-                        <ThumbDownOffAltIcon  value={click} onClick={(e) => setReject("Rejected")}/></div>)
+                       list.accepted === accept ? (<p>Accepted</p>) : (reject ? (<p>Rejected</p>) : (<div><ThumbUpOffAltIcon value={click} onClick={(e) => setAccept("Accepted")}/>
+                        <ThumbDownOffAltIcon  value={click} onClick={(e) => setReject("Rejected")}/></div>))
                       }
                     </div>
                     </td>
@@ -65,3 +65,6 @@ function FeedbackTable() {
 }
 
 export default FeedbackTable
+
+
+// c ? (ok) : ()
