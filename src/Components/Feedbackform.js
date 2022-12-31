@@ -4,6 +4,8 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/system';
 import { Rating } from '@mui/material';
+import Validation from './Validation';
+import axios from 'axios';
 
 const getDatafromEntry = () => {
     const entry = localStorage.getItem("feedback");
@@ -18,39 +20,45 @@ function Feedbackform( ) {
     const [name, setName] = useState("");
     const [mobile, setMobile] = useState("");
     const [rating, setRating] = useState("");
-    const [likeBtn, setLikeBtn] = useState();
+    const [recommendation, setRecommendation] = useState();
     const [comments, setComments] = useState("");
     const [data, setData] = useState(getDatafromEntry());
     const navigate = useNavigate();
+    const [errors, setErrors] = useState({});
 
-    // const handleClick = () => {
-    //     setActive(!active);
-    //     setLikeBtn("Yes")
-    //   };
-
-    //   const handleOnClick = () => {
-    //     setActive(!active);
-    //     setLikeBtn("No")
-    //   };
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        axios
+            .post("http://localhost:8081/feedback", {
+                name: name,
+                mobile: mobile,
+                rating: parseInt(rating),
+                recommendation: parseInt(recommendation),
+                comments: comments,
+            })
+            .then((response) => {
+                console.log(response);
+                navigate("/table")
+            })
         let newFeedback = {
             id: data.length + 1,
             name,
             mobile,
             rating,
-            likeBtn,
+            recommendation,
             comments,
             accepted: ""
         };
         setName("");
         setMobile("");
         setRating("");
-        setLikeBtn("");
+        setRecommendation("");
         setComments("");
+        setErrors(Validation(data));
 
-        localStorage.setItem("feedback", JSON.stringify([...data, newFeedback]));
+        // localStorage.setItem("feedback", JSON.stringify([...data, newFeedback]));
         setData();
         navigate("/table")
     }
@@ -62,10 +70,12 @@ function Feedbackform( ) {
             <div className='form-div'>
                 <label className='form-div-label'>Name: </label>
                 <input type='text' name='name' value={name} onChange={(e) => setName(e.target.value)} className='form-div-input'/>
+                {errors.name && <p className="error">{errors.name}</p>}
             </div>
             <div className='form-div'>
                 <label className='form-div-label'>Mobile:</label>
                 <input type='text' name='mobile' value={mobile} onChange={(e) => setMobile(e.target.value)} className='form-div-input'/>
+                {errors.mobile && <p className="error">{errors.mobile}</p>}
             </div>
             <div className='form-div'>
                 <label className='form-div-label'>How do you rate our Service?</label>
@@ -76,8 +86,8 @@ function Feedbackform( ) {
             <div className='form-div'>
                 <label className='form-div-label'>Will you recommend us to Friends?</label>
                 <div className='form-div-input-icon'>
-                    <ThumbUpIcon className='likeBtn' style={{color: likeBtn === "Yes" ? "green" : "black"}}  value={likeBtn} onClick={() => setLikeBtn("Yes")} />
-                    <ThumbDownIcon className='dislikebtn' style={{color: likeBtn === "No" ? "red" : "black"}} value={likeBtn} onClick={() => setLikeBtn("No")}/>
+                    <ThumbUpIcon className='likeBtn' style={{color: recommendation === "1" ? "green" : "black"}}  value={recommendation} onClick={() => setRecommendation("1")} />
+                    <ThumbDownIcon className='dislikebtn' style={{color: recommendation === "0" ? "red" : "black"}} value={recommendation} onClick={() => setRecommendation("0")}/>
                 </div>
             </div>
             <div className='form-div'>
