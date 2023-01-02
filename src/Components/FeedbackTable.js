@@ -7,9 +7,7 @@ import axios from 'axios';
 
 
 function FeedbackTable() {
-    const [click, setClick] = useState("")
-    // const [accept, setAccept] = useState(false);
-    // const [reject, setReject] = useState(false);
+    const [click, setClick] = useState("");
     const [data, setData] = useState([]);
 
     const fetchAllFeedbacks = () =>{
@@ -71,7 +69,6 @@ function FeedbackTable() {
       });
     };
 
-    
   return (
     <div className='feedback-container'>
         <h1>Feedback Table</h1>
@@ -118,6 +115,3 @@ function FeedbackTable() {
 }
 
 export default FeedbackTable
-
-
-// c ? (ok) : ()
